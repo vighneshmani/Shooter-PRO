@@ -28,7 +28,6 @@ public class Triple_Shot : MonoBehaviour
     {
         if (other.tag == "Player") 
         {
-            Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
 
