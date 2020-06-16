@@ -4,7 +4,6 @@ Shooter Pro is basically a 2D shooting game that is based in a nebula space envi
 * Now in order to make a game, we must have a basic understanding of the environment in which the game is made.
 * Two things that are the really important to get started with, is a Game Engine and a scripting code language.
 
-* This project consists is made with:
 * Game Engine: Unity
 * Scripted in C#.
 
