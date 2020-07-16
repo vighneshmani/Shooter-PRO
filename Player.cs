@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     {       //take the current position = new position(0,0,0)
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-        if(_spawnManager == null)
+        if (_spawnManager == null)
         {
             Debug.LogError("The Spawn Manager is NULL");
         }
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalculateMovement();
-        Fire();    
+        Fire();
     }
 
     void CalculateMovement()
@@ -77,32 +77,44 @@ public class Player : MonoBehaviour
     }
     void Fire()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && Time.time > _nextfire)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextfire)
         {
             _nextfire = _nextfire + _firerate;
 
-            if(isTripleShotActive == true)
+            if (isTripleShotActive == true)
             {
-                Instantiate(_Tripleshotprefab, transform.position + new Vector3(0,0,0), Quaternion.identity);
+                Instantiate(_Tripleshotprefab, transform.position, Quaternion.identity);
             }
 
             else
             {
                 Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
             }
-            
+
         }
     }
 
     public void Damage()
     {
         _lives--;
-        
-        if(_lives < 1)
+
+        if (_lives < 1)
         {
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
         }
+    }
+
+    public void TripleShotActive()
+    {
+        isTripleShotActive = true;
+        StartCoroutine(TripleShotPowerDownRoutine());
+    }
+
+    IEnumerator TripleShotPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5.0f);
+        isTripleShotActive = false;
     }
 }
     
